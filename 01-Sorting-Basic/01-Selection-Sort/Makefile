@@ -18,10 +18,7 @@ CFLAGS=-g \
 CPPFLAGS=-D_GNU_SOURCE \
   -D__STDC_LIMIT_MACROS \
   -DVERSION=\"1.9.8.7\"
-INCPATH=-I. \
-  -I./include \
-  -I./output \
-  -I./output/include
+INCPATH=-I../deps/
 DEP_INCPATH=
 
 #============ CCP vars ============
@@ -34,7 +31,7 @@ CCP_FLAGS=
 
 
 #BUILDMAKE UUID
-BUILDMAKE_MD5=ef689ca1887947aa9a8be9a53cff0108  BUILDMAKE
+BUILDMAKE_MD5=301ac547fccf3fc532db68d7eb646147  BUILDMAKE
 
 
 .PHONY:all
@@ -87,8 +84,7 @@ love:
 	mkdir -p ./output/bin
 	cp -f --link 01-Selection-Sort ./output/bin
 
-01-Selection-Sort_main.o:main.cpp \
-  sort_test_helper.h
+01-Selection-Sort_main.o:main.cpp
 	@echo "[[1;32;40mBUILDMAKE:BUILD[0m][Target:'[1;31;40m01-Selection-Sort_main.o[0m']"
 	$(CXX) -c $(INCPATH) $(DEP_INCPATH) $(CPPFLAGS) $(CXXFLAGS)  -o 01-Selection-Sort_main.o main.cpp
 

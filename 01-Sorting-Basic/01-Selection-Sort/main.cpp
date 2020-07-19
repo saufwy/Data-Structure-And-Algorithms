@@ -17,15 +17,8 @@ void selection_sort(int arr[], int n){
 int main() {
     int size = 10000;
     int* arr = generate_random_array(size, 0, 10000);
-
-	auto start = std::chrono::system_clock::now();
-    selection_sort(arr, size); 
-	auto end = std::chrono::system_clock::now();
-	auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
+    test_sort("selection sort", selection_sort, arr, size);
     delete [] arr;
-
-	std::cout << "cost : " << duration.count() << " ms" << std::endl;
-
     return 0;
 }
 
