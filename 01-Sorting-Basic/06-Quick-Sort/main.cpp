@@ -4,6 +4,8 @@
 
 // 返回p 使得 arr[l, p - 1] < arr[p] < arr[p + 1, r]
 int  __partition(int arr[], int l, int r) {
+    // 优化方案1  随机选择哨兵, 降低快排退化为O(n^2) 的可能性
+    // std::swap(arr[l], arr[rand() % (r - l + 1) + l]);
     int v = arr[l];
     // i 当前要访问的元素
     // arr[l+1, j] < v < arr[j+1, i)
@@ -37,7 +39,7 @@ int main() {
     int* arr1 = generate_random_array(size, 0, 100);
     // 第一次很快排好序
     test_sort("quick sort", quick_sort, arr1, size);
-    // 第二次快排将为O(n^2)
+    // 第二次快排退化为O(n^2)
     test_sort("quick sort", quick_sort, arr1, size);
     delete [] arr1;
     return 0;
