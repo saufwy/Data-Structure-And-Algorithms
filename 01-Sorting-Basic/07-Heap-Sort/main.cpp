@@ -1,6 +1,9 @@
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 
 #include "sort_test_helper.h"
+#include "max_heap.h"
 
 #define left(i) (2 * i + 1)
 #define right(i) (2 * i)
@@ -36,10 +39,18 @@ void heap_sort(int arr[], int size) {
 }
 
 int main() {
-    int size = 1000000;
-    int* arr = generate_random_array(size, 0, 1000000);
-    test_sort("heap sort", heap_sort, arr, size);
-    delete [] arr;
+    // int size = 1000000;
+    // int* arr = generate_random_array(size, 0, 1000000);
+    // test_sort("heap sort", heap_sort, arr, size);
+    // delete [] arr;
+
+    int size = 20;
+    srand(time(nullptr));
+    MaxHeap<int> max_heap(100);
+    for (int i = 0; i < size; i++) {
+        max_heap.insert(rand() % 100);
+    }
+    max_heap.print();
     return 0;
 }
 
