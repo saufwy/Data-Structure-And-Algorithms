@@ -6,7 +6,7 @@
 #include "max_heap.h"
 
 #define left(i) (2 * i + 1)
-#define right(i) (2 * i)
+#define right(i) (2 * i + 2)
 
 void max_heapify(int arr[], int size, int i) {
     int l = left(i);
@@ -39,13 +39,16 @@ void max_heapify_non_recursion(int arr[], int size, int i) {
         if (largest != i) {
             std::swap(arr[i], arr[largest]);
             i = largest;
+        } else {
+            break;
         }
     } while(true);
 }
 
 void build_max_heap(int arr[], int size) {
-    for (int i = size / 2 - 1; i >=0; i--) {
-       max_heapify(arr, size, i); 
+    for (int i = (size - 1) / 2; i >=0; i--) {
+       // max_heapify(arr, size, i);
+       max_heapify_non_recursion(arr, size, i);
     }
 }
 
