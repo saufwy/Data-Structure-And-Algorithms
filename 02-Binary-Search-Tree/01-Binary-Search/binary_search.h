@@ -18,13 +18,30 @@ int binary_search(int arr[], int n, int target) {
     return -1;
 }
 
-int lower_bound(int arr[], int n, int target) {
+int my_lower_bound(int arr[], int n, int target) {
     int l = 0;
     int count = n;
     while (count > 0) {
         int step = count / 2;
         int mid = l + step;
         if (arr[mid] < target) {
+            l = mid + 1; 
+            count -= (step + 1);
+        } else {
+            count = step;
+        }
+
+    }
+    return l;
+}
+
+int my_upper_bound(int arr[], int n, int target) {
+    int l = 0;
+    int count = n;
+    while (count > 0) {
+        int step = count / 2;
+        int mid = l + step;
+        if (!(arr[mid] > target)) {
             l = mid + 1; 
             count -= (step + 1);
         } else {

@@ -1,5 +1,6 @@
 #include <iostream> 
 #include <cassert>
+#include <algorithm>
 #include "binary_search.h"
 
 void test_binary_search() {
@@ -12,8 +13,14 @@ void test_binary_search() {
         assert(i == binary_search(arr, size, arr[i]));
     }
 }
+
 int main() {
-    int arr[] = {0, 0, 0, 0, 0};
-    std::cout << lower_bound(arr, 5, 3) << std::endl;
+    int size = 5;
+    int arr[] = {2, 4, 5, 6, 9};
+    std::cout << *std::lower_bound(arr, arr + size, 4) << std::endl;
+    std::cout << *std::upper_bound(arr, arr + size, 4) << std::endl;
+
+    std::cout << "index=" << my_lower_bound(arr, size, 4) << std::endl;
+    std::cout << "index=" << my_upper_bound(arr, size, 4) << std::endl;
     return 0;
 }
