@@ -13,7 +13,7 @@ void test_binary_search() {
     }
 }
 int main() {
-    int arr[] = {0, 2, 4, 5, 9};
+    int arr[] = {0, 0, 0, 0, 0};
     std::cout << lower_bound(arr, 5, 3) << std::endl;
     return 0;
 }
