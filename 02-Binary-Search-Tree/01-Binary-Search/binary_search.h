@@ -18,5 +18,18 @@ int binary_search(int arr[], int n, int target) {
     return -1;
 }
 
+int lower_bound(int arr[], int n, int target) {
+    int l = 0;
+    int r = n -1;
+    while (l <= r) {
+        int mid = l + (r - l) / 2;
+        if (arr[mid] > target) {
+            r = mid - 1; 
+        } else {
+            l = mid;
+        }
+    }
+    return l - 1;
+}
 #endif
 

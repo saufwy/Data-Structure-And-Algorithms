@@ -2,7 +2,7 @@
 #include <cassert>
 #include "binary_search.h"
 
-int main() {
+void test_binary_search() {
     int size = 1000;
     int arr[size];
     for (int i = 0; i < size; i++) {
@@ -11,5 +11,9 @@ int main() {
     for (int i = 0; i < size; i++) {
         assert(i == binary_search(arr, size, arr[i]));
     }
+}
+int main() {
+    int arr[] = {0, 2, 4, 5, 9};
+    std::cout << lower_bound(arr, 5, 3) << std::endl;
     return 0;
 }
