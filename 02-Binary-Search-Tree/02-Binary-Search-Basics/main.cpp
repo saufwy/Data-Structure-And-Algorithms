@@ -3,22 +3,6 @@
 
 template <typename Key, typename Value>
 class BST {
-public:
-    BST() {
-        root = nullptr;
-        count = 0;
-    }
-    ~BST() {
-    }
-
-    int size() const {
-        return count;
-    }
-
-    bool empty() {
-        return count == 0;
-    }
-
 private:
     struct Node {
         Key key;
@@ -33,8 +17,44 @@ private:
         }
     };
 
-    Node* root;
-    int count;
+    Node* _root;
+    int _count;
+
+public:
+    BST() {
+        _root = nullptr;
+        _count = 0;
+    }
+    ~BST() {
+    }
+
+    int size() const {
+        return _count;
+    }
+
+    bool empty() {
+        return _count == 0;
+    }
+
+    void insert(Key key, Value value) {
+        _root = _insert(_root, key, value);
+    }
+
+protected:
+    Node* _insert(Node* node, Key key, Value value) {
+        if (node == nullptr) {
+            return new Node(key, value);
+        }
+        if (node->key == key) {
+            node->value = value;
+        } else if (node->key > key) {
+            node->left = _insert(node->left, key, value);
+        } else {
+            node->_insert(node->right, key, value);
+        }
+        return node;
+    }
+
 };
 
 int main() {
