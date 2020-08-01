@@ -26,6 +26,7 @@ public:
         _count = 0;
     }
     ~BST() {
+        _destroy(_root);
     }
 
     int size() const {
@@ -124,6 +125,15 @@ protected:
             _post_order(node->left);
             _post_order(node->right);
             std::cout << node->key << std::endl;
+        }
+    }
+
+    void _destroy(Node* &node) {
+        if (node != nullptr) {
+            _destroy(node->left);
+            _destroy(node->right);
+            delete node; node = nullptr;
+            _count--;
         }
     }
 };
