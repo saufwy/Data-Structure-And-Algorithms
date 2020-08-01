@@ -48,6 +48,18 @@ public:
         return _search(_root, key);
     }
 
+    void pre_order() const {
+        _pre_order(_root);
+    }
+
+    void in_order() const {
+        _in_order(_root);
+    }
+
+    void post_order() const {
+        _post_order(_root);
+    }
+
 protected:
     Node* _insert(Node* node, Key key, Value value) {
         if (node == nullptr) {
@@ -91,18 +103,47 @@ protected:
         }
     }
 
+    void _pre_order(Node* node) const {
+        if (node != nullptr) {
+            std::cout << node->key << std::endl;
+            _pre_order(node->left);
+            _pre_order(node->right);
+        }
+    }
+
+    void _in_order(Node* node) const {
+        if (node != nullptr) {
+            _in_order(node->left);
+            std::cout << node->key << std::endl;
+            _in_order(node->right);
+        }
+    }
+
+    void _post_order(Node* node) const {
+        if (node != nullptr) {
+            _post_order(node->left);
+            _post_order(node->right);
+            std::cout << node->key << std::endl;
+        }
+    }
 };
 
 int main() {
-    BST<std::string,int> bst;
-    bst.insert("1", 100);
-    bst.insert("2", 101);
-    bst.insert("3", 102);
-    bst.insert("4", 103);
-    bst.insert("5", 104);
-    if (bst.contain("1")) {
-        std::cout << *bst.search("5") << std::endl;
-    }
+    BST<int,int> bst;
+    bst.insert(28, 1);
+    bst.insert(16, 1);
+    bst.insert(30, 1);
+    bst.insert(13, 1);
+    bst.insert(22, 1);
+    bst.insert(29, 1);
+    bst.insert(42, 1);
+
+    std::cout <<  "preorder" << std::endl;
+    bst.pre_order();
+    std::cout <<  "inorder" << std::endl;
+    bst.in_order();
+    std::cout <<  "postorder" << std::endl;
+    bst.post_order();
     return 0;
 }
 
