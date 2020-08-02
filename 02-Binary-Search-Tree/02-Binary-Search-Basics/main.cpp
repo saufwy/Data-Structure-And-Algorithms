@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <queue>
 
 template <typename Key, typename Value>
 class BST {
@@ -59,6 +60,22 @@ public:
 
     void post_order() const {
         _post_order(_root);
+    }
+
+    void level_order() const {
+        std::queue<Node*> queue;
+        queue.push(_root);
+        while (!queue.empty()) {
+            Node* node = queue.front();
+            queue.pop();
+            std::cout << node->key << std::endl;
+            if (node->left != nullptr) {
+                queue.push(node->left);
+            }
+            if (node->right != nullptr) {
+                queue.push(node->right);
+            }
+        }
     }
 
 protected:
@@ -154,6 +171,8 @@ int main() {
     bst.in_order();
     std::cout <<  "postorder" << std::endl;
     bst.post_order();
+    std::cout <<  "levelorder" << std::endl;
+    bst.level_order();
     return 0;
 }
 
