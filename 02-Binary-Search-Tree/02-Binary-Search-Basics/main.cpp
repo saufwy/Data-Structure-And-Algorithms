@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <queue>
+#include <cassert>
 
 template <typename Key, typename Value>
 class BST {
@@ -78,9 +79,34 @@ public:
         }
     }
 
+    Key minimum() const {
+        assert(_count != 0);
+        Node* node = _minimum(_root);
+        return node->key;
+    }
+
+    Key maximum() const {
+        assert(_count !=0);
+        Node* node = _maximum(_root);
+        return node->key;
+    }
+
+    void remove_min() {
+        _root = _remove_min(_root);
+    }
+
+    void remove_max() {
+        _root = _remove_max(_root);
+    }
+
+    void remove(Key key) {
+        _root = _remove(_root, key);
+    }
+
 protected:
     Node* _insert(Node* node, Key key, Value value) {
         if (node == nullptr) {
+            _count++;
             return new Node(key, value);
         }
         if (node->key == key) {
@@ -153,6 +179,81 @@ protected:
             _count--;
         }
     }
+
+    Node* _minimum(Node* node) const {
+        if (node->left == nullptr) {
+            return node;
+        } else {
+            return _minimum(node->left);
+        }
+    }
+
+    Node* _maximum(Node* node) const {
+        if (node->right == nullptr) {
+            return node;
+        }
+        return _maximum(node->right);
+    }
+
+    Node* _remove_min(Node* node) {
+        if (node->left == nullptr) {
+            Node* right = node->right;
+            delete node;
+            node = nullptr;
+            _count--;
+            return right;
+        } else {
+            node->left = _remove_min(node->left);
+            return node;
+        }
+    }
+
+    Node* _remove_max(Node* node) {
+        if (node->right == nullptr) {
+            Node* left = node->left;
+            delete node;
+            node = nullptr;
+            _count--;
+            return left;
+        } else {
+            node->right = _remove_max(node->right);
+            return node;
+        }
+    }
+
+    Node* _remove(Node* node, Key key) {
+        if (node == nullptr) {
+            return nullptr;
+        }
+        if (node->key == key) {
+            // left is nullptr
+            if (node->left == nullptr) {
+                Node* right = node->right;
+                delete node; node = nullptr;
+                return right;
+            }
+            // right is nullptr
+            if (node->right == nullptr) {
+                Node* left = node->left;
+                delete node; node = nullptr;
+                return left;
+            }
+
+            // node has two childs
+            // the min of node->right replace pos of cur node
+            Node* min_right = _minimum(node->right);
+            Node* new_node = new Node(min_right->key, min_right->value);
+            new_node->left = node->left;
+            new_node->right = _remove_min(node->right);
+            _count++;
+            delete node; node= nullptr;
+            return new_node;
+        } else if (node->key > key) {
+            node->left = _remove(node->left, key);
+        } else { // node->key < key
+            node->right = _remove(node->right, key);
+        }
+    }
 };
 
 int main() {
@@ -165,6 +266,7 @@ int main() {
     bst.insert(29, 1);
     bst.insert(42, 1);
 
+    /*
     std::cout <<  "preorder" << std::endl;
     bst.pre_order();
     std::cout <<  "inorder" << std::endl;
@@ -173,6 +275,17 @@ int main() {
     bst.post_order();
     std::cout <<  "levelorder" << std::endl;
     bst.level_order();
+    std::cout <<  "minimum : " << bst.minimum() << std::endl;
+    std::cout <<  "maximum : " << bst.maximum() << std::endl;
+    std::cout << "after remove min max" << std::endl;
+    bst.remove_min();
+    bst.remove_max();
+    std::cout <<  "minimum : " << bst.minimum() << std::endl;
+    std::cout <<  "maximum : " << bst.maximum() << std::endl;
+    */
+
+    bst.remove(30);
+    bst.in_order();
     return 0;
 }
 
