@@ -6,6 +6,7 @@ int main() {
     int n = 100000;
     test_uf1(n);
     test_uf2(n);
+    test_uf3(n);
     return 0;
 }
 
