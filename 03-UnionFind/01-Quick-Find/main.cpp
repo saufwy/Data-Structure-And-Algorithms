@@ -8,6 +8,7 @@ int main() {
     // test_uf2(n);
     test_uf3(n);
     test_uf4(n);
+    test_uf5(n);
     return 0;
 }
 
