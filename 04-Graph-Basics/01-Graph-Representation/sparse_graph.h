@@ -27,6 +27,35 @@ public:
             _edges[w].push_back(v);
         }
     }
+public:
+    class Iterator {
+    public:
+        Iterator(SparseGraph& sparse_graph, int v)
+            : _sparse_graph(sparse_graph),
+              _v(v) {}
+
+        int begin() {
+            if (_index >= _sparse_graph._edges[_v].size()) {
+                return -1;
+            }
+            return _sparse_graph._edges[_v][_index++];
+        }
+
+        int next() {
+            return _sparse_graph._edges[_v][_index++];
+        }
+
+        bool end() {
+            return _index >= _sparse_graph._edges[_v].size();
+        }
+
+    protected:
+        SparseGraph& _sparse_graph;
+        int _v;
+        int _index = 0;
+    };
+
+    friend class Iterator;
 
 protected:
     std::vector<std::vector<int>> _edges;
