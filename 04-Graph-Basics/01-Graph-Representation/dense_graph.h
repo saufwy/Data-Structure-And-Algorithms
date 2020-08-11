@@ -34,6 +34,37 @@ public:
         return _matrix[v][w];
     }
 
+public:
+    class Iterator {
+    public:
+        Iterator(DesenGraph& desen_graph, int v)
+            : _desen_graph(desen_graph),
+              _v(v) {}
+
+        int begin() {
+            _index = -1;
+            return next();
+        }
+
+        int next() {
+            for (_index++; _index < _desen_graph._node_nums; _index++) {
+                if (_desen_graph._matrix[_v][_index]) {
+                    return _index;
+                }
+            }
+            return -1;
+        }
+
+        bool end() {
+            return _index >= _desen_graph._node_nums;
+        }
+
+    protected:
+        DesenGraph& _desen_graph;
+        int _v;
+        int _index = -1;
+    };
+
 protected:
     std::vector<std::vector<bool>> _matrix;
     int _node_nums = 0;
