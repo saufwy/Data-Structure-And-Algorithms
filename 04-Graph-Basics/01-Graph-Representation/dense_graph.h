@@ -34,6 +34,18 @@ public:
         return _matrix[v][w];
     }
 
+    void show() const {
+        for (int i = 0; i < _node_nums; i++) {
+            std::cout << i << " : ";
+            for (int j = 0; j < _node_nums; j++) {
+                if (_matrix[i][j]) {
+                    std::cout << j << " ";
+                }
+            }
+            std::cout << std::endl;
+        }
+    }
+
 public:
     class Iterator {
     public:

@@ -12,6 +12,7 @@ int main() {
     for (int w = desen_it.begin(); !desen_it.end(); desen_it.next()) {
         std::cout << v << "---" << w << std::endl;
     }
+    desen.show();
 
     SparseGraph sparse(10, false);
     sparse.add_edge(2, 3);
@@ -20,8 +21,9 @@ int main() {
     for (int w = sparse_it.begin(); !sparse_it.end(); w = sparse_it.next()) {
         std::cout << v << "---" << w << std::endl;
     }
+    sparse.show();
 
-    ReadGraph<SparseGraph> read_graph(sparse, "sparse.txt");
+    ReadGraph<SparseGraph> read_graph(sparse, "test.txt");
     read_graph.read();
     return 0;
 }

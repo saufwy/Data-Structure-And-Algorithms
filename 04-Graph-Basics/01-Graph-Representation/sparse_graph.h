@@ -27,6 +27,17 @@ public:
             _edges[w].push_back(v);
         }
     }
+
+    void show() const {
+        for (int i = 0; i < _node_nums; i++) {
+            std::cout << i << " : ";
+            for (auto v : _edges[i]) {
+                std::cout << v << " ";
+            }
+            std::cout << std::endl;
+        }
+    }
+
 public:
     class Iterator {
     public:
