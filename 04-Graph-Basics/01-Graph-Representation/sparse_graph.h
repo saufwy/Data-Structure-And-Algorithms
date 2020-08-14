@@ -22,6 +22,7 @@ public:
         if (v == w) {
             return;
         }
+        _edge_nums++;
         _edges[v].push_back(w);
         if (!_directed) {
             _edges[w].push_back(v);
@@ -38,6 +39,9 @@ public:
         }
     }
 
+    int V() const {
+        return _node_nums;
+    }
 public:
     class Iterator {
     public:

@@ -3,8 +3,10 @@
 #include "dense_graph.h"
 #include "sparse_graph.h"
 #include "read_graph.h"
+#include "component.h"
 
-int main() {
+
+int test_build_graph() {
     DesenGraph desen(10, false);
     desen.add_edge(2, 3);
     int v = 2;
@@ -25,6 +27,19 @@ int main() {
 
     ReadGraph<SparseGraph> read_graph(sparse, "test.txt");
     read_graph.read();
+    return 0;
+}
+
+int test_component() {
+    SparseGraph sparse(10, false);
+    ReadGraph<SparseGraph> read_graph(sparse, "test.txt");
+    read_graph.read();
+    Component<SparseGraph> component(sparse);
+    std::cout << component.count() << std::endl;
+    return 0;
+}
+
+int main() {
     return 0;
 }
 
