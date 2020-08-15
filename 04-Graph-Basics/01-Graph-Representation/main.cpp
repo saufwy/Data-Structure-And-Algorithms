@@ -4,6 +4,7 @@
 #include "sparse_graph.h"
 #include "read_graph.h"
 #include "component.h"
+#include "path.h"
 
 
 int test_build_graph() {
@@ -39,7 +40,19 @@ int test_component() {
     return 0;
 }
 
+void test_path() {
+    SparseGraph sparse(10, false);
+    ReadGraph<SparseGraph> read_graph(sparse, "test.txt");
+    read_graph.read();
+    Path<SparseGraph> path(sparse, 0);
+    if (path.has_path(3)) {
+        std::vector<int> vec;
+        path.get_path(3, vec);
+    }
+}
+
 int main() {
+    test_path();
     return 0;
 }
 
