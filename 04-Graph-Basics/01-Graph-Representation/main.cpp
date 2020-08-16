@@ -5,6 +5,7 @@
 #include "read_graph.h"
 #include "component.h"
 #include "path.h"
+#include "shortest_path.h"
 
 
 int test_build_graph() {
@@ -51,8 +52,16 @@ void test_path() {
     }
 }
 
+void test_shortest_path() {
+    SparseGraph sparse(10, false);
+    ReadGraph<SparseGraph> read_graph(sparse, "test.txt");
+    read_graph.read();
+    ShortestPath<SparseGraph> shortest_path(sparse, 0);
+}
+
 int main() {
     test_path();
+    test_shortest_path();
     return 0;
 }
 
