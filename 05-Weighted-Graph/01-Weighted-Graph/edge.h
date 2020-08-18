@@ -11,11 +11,11 @@ public:
 
     ~Edge() {}
 
-    int V() const {
+    int v() const {
         return _v;
     }
 
-    int W() const {
+    int w() const {
         return _w;
     }
 
